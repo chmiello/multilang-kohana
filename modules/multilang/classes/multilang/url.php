@@ -33,8 +33,11 @@ class Multilang_URL extends Kohana_URL {
 
 		// Concat the URL
 		$url = URL::base($protocol, $index).$path;
-		if (!Multilang::factory()->is_language($url)) 
-			 $url .= '/'.Multilang::factory()->language();
+		if ( ! Multilang::factory()->is_language($url)) 
+			 if( ! empty($patch))
+			 	$url .= '/'.Multilang::factory()->language();
+			 else
+			 	$url .= Multilang::factory()->language();
 		return $url;
 	}
 
