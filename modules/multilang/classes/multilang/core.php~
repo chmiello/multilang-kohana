@@ -83,7 +83,7 @@ class Multilang_Core {
 				$string = $lang;
 			else
 			{
-				// sprawdzenie języka usera
+				//sprawdzenie języka usera
 				$lang = Multilang::factory()->user_language();
 				if(Multilang::acceptLangs($lang))
 					$string = $lang;
