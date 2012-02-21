@@ -8,15 +8,16 @@
  */
 
 
-Route::set('only.lang','', array('lang' => '('.implode('|',Multilang::langs()).')'))
+Route::set('only.lang','', array('lang' => '('.implode('|',Multilang::factory() -> langs()).')'))
 	-> defaults(array(
-		'controller' => 'welcome',
-		'action' => 'index',
+		'direction' => 'default',
+		'controller' => 'index',
 		'lang' => Kohana::$config->load('multilang.default'),
 	));
 	
-Route::set('test', 'profil/login(/<id>)')
-	-> defaults(array(
-		'controller' => 'welcome',
-		'action' => 'index',
-	));
+function __($string, array $values = NULL)
+{
+	// wyświetlanie ciągu w danym języku
+	$string = I18n::get($string,Multilang::factory() -> language());
+	return empty($values) ? $string : strtr($string, $values);
+}

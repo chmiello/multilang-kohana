@@ -9,4 +9,5 @@
  */
 return array(
 	'default'		=> 'en', // The default language code
+	'languages'		=> array('pl' => 'Polski','en' => 'English','fr' => 'French','es' => 'Spanish'),
 );
