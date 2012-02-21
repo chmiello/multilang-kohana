@@ -6,10 +6,15 @@
 
 class Multilang_Core {
 
+	public static function langs()
+	{
+		// lista pobierana np z DB b¹dŸ z pliku config 
+		return array('pl','en','fr','es');
+	}
+
 	public static function acceptLangs($lang)
 	{
-		// lista langów pobrana z np.DB
-		$list = array('pl','en','fr','es');
+		$list = Multilang::langs();
 		if(in_array($lang,$list))
 		{
 			return TRUE;
