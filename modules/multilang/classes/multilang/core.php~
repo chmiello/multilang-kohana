@@ -100,7 +100,7 @@ class Multilang_Core {
 		$status = FALSE;
 		foreach(Multilang::factory()->langs() as $lang => $name)
 		{
-			if(preg_match('/\/'. $lang .'/i',$string))
+			if(preg_match('///'.$lang,$string))
 				$status = TRUE;
 		}
 		return $status;

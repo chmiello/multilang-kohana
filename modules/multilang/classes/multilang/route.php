@@ -38,36 +38,27 @@ class Multilang_Route extends Kohana_Route {
 	public static function url($name, array $params = NULL, $protocol = NULL)
 	{
 		$route = Route::get($name);
-		if(!isset($params['lang'])) { $params['lang'] = Multilang::factory() -> language(); }
+		if(!isset($params['lang'])) 
+		 	$params['lang'] = Multilang::factory()->language(); 
 		// Create a URI with the route and convert it to a URL
 		if ($route->is_external())
-		{
 			return Route::get($name)->uri($params);
-		}
 		else
 			return URL::site(Route::get($name)->uri($params), $protocol);
 	}
 
 	public function __construct($uri = NULL, $regex = NULL)
 	{
-		if(eregi('>)',$uri)) 
-		{
-			$uri = str_replace('>)','>(/<lang>))',$uri);
-		}
-		else if($uri == '')
-		{
+		if ( ($uri == '') or ($uri === NULL) )
 			$uri = '<lang>';
-		}
+		elseif (preg_match('/>\)/',$uri))
+			$uri = str_replace('>)','>(/<lang>))',$uri);
 		else
-		{
 			$uri .= '(/<lang>)';
-		}
 		
 		if ($uri === NULL)
-		{
 			// Assume the route is from cache
 			return;
-		}
 
 		if ( ! is_string($uri) AND is_callable($uri))
 		{
@@ -76,14 +67,10 @@ class Multilang_Route extends Kohana_Route {
 			$regex = NULL;
 		}
 		elseif ( ! empty($uri))
-		{
 			$this->_uri = $uri;
-		}
 
 		if ( ! empty($regex))
-		{
 			$this->_regex = $regex;
-		}
 
 		// Store the compiled regex locally
 		$this->_route_regex = Route::compile($uri, $regex);
