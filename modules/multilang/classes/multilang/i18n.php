@@ -35,29 +35,39 @@ class Multilang_I18n extends Kohana_I18n{
 	{
 		$lang = Request::factory(Request::detect_uri()) -> param('lang');
 		$default = Kohana::$config->load('multilang.default');
-		if($lang)
+		
+		// jeżeli istnieje <lang> i lang jest językiem zgodym z ustawieniami
+		if($lang and Multilang::acceptLangs($lang))
 		{
+			$string = $lang;
+		}
+		// nie istnieje lang bądź jest niezgody z wytycznymi
+		else 
+		{
+			// szukanie langa w uri (jeżeli parametr lang nie ma wartości bądź wartość jest błędna)
+			$uri = Request::detect_uri();
+			$uri = explode('/',$uri);
+			$lang = end($uri);
 			if(Multilang::acceptLangs($lang))
 			{
+				// odnaleziony w uri język jest poprawyny
 				$string = $lang;
 			}
 			else
 			{
-				$string = $default;
+				//sprawdzenie języka usera
+				$lang = I18n::user_language();
+				if(Multilang::acceptLangs($lang))
+				{
+					$string = $lang;
+				}
+				else
+				{
+					$string = $default;
+				}
 			}
 		}
-		else
-		{
-			$lang = I18n::user_language();
-			if(Multilang::acceptLangs($lang))
-			{
-				$string = $lang;
-			}
-			else
-			{
-				$string = $default;
-			}
-		}
+		
 		return $string;
 	}
 	

@@ -14,3 +14,9 @@ Route::set('only.lang','', array('lang' => '('.implode('|',Multilang::langs()).'
 		'action' => 'index',
 		'lang' => Kohana::$config->load('multilang.default'),
 	));
+	
+Route::set('test', 'profil/login(/<id>)')
+	-> defaults(array(
+		'controller' => 'welcome',
+		'action' => 'index',
+	));
