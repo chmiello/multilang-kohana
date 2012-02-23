@@ -1,4 +1,8 @@
 <?php defined('SYSPATH') or die('No direct script access.');
+/**
+ * Multilang core class
+ * From the module https://github.com/GeertDD/kohana-lang
+ */
 
 class Multilang_Core {
 
