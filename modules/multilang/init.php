@@ -3,9 +3,10 @@
 
 Route::set('only.lang','', array('lang' => '('.implode('|',Multilang::factory()->langs()).')'))
 	-> defaults(array(
-		'direction' => 'default',
-		'controller' => 'index',
-		'lang' => Kohana::$config->load('multilang.default'),
+		'direction' => '',
+		'controller' => 'welcome',
+		'action' => 'a',
+		//'lang' => Kohana::$config->load('multilang.default'),
 	));
 	
 function __($string, array $values = NULL)

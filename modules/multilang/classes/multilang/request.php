@@ -16,7 +16,8 @@ class Multilang_Request extends Kohana_Request {
 			if ($params = $route->matches($uri))
 			{
 				
-				if ( ! empty($params['lang']) or Multilang::factory()->acceptLangs($uri) )
+				//print_r($params);
+				if ( ! empty($params['lang']))
 					return array(
 						'params' => $params,
 						'route' => $route,
@@ -34,7 +35,7 @@ class Multilang_Request extends Kohana_Request {
 					}
 					if ( ! empty($lang))
 					{	
-						$params = $route->matches(str_replace(''.$lang,'',$uri));
+						$params = $route->matches(str_replace('/'.$lang,'',$uri));
 						$params['lang'] = $lang;
 					}
 					return array(
