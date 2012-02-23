@@ -14,6 +14,11 @@ class Multilang_Core {
 		return Multilang::$_instance;
 	} 
 	
+	public function default_lang()
+	{
+		return $this->config['default'];
+	}
+	
 	public function __construct()
 	{
 		$this->config = Kohana::$config->load('multilang');
@@ -59,10 +64,10 @@ class Multilang_Core {
 		return false;
 	}
 	
-	public function language()
+	public function language($uri = null)
 	{
 		$lang = Request::factory(Request::detect_uri())->param('lang');
-		$default = Kohana::$this->config['default'];
+		$default = $this->config['default'];
 		
 		// jeżeli istnieje <lang> i lang jest językiem zgodym z ustawieniami
 		if ($lang and Multilang::acceptLangs($lang))
