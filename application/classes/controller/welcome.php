@@ -10,7 +10,7 @@ class Controller_Welcome extends Controller {
 			<br /><a href="'.route::url('only.lang',array('lang' => 'en')).'">EN</a>
 			<br /><a href="'.route::url('only.lang',array('lang' => 'fr')).'">FR</a>
 			<br /><a href="'.route::url('only.lang',array('lang' => 'es')).'">ES</a>
-			
+			Działa :) 
 		');
 		
 	}
